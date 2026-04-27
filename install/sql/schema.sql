@@ -73,7 +73,3 @@ VALUES
   ('asset_manager', 'Gestionnaire des assets', 1, NOW(), NOW()),
   ('user_management', 'Gestion des utilisateurs', 1, NOW(), NOW())
 ON DUPLICATE KEY UPDATE label = VALUES(label), is_active = VALUES(is_active), updated_at = NOW();
-
-INSERT INTO users (username, password_hash, role, created_at, updated_at)
-VALUES ('superadmin', '$2y$12$VvGijaGVet5PQW4YWz2u.uWl9Sic1tPwHjzBvPzh8c3LM.hVS8j1e', 'super_admin', NOW(), NOW())
-ON DUPLICATE KEY UPDATE updated_at = NOW();

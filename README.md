@@ -11,28 +11,25 @@ Application de monitoring installable en PHP/MariaDB avec authentification oblig
 - Dashboard public (accès après login).
 - Espace admin pour éditer les widgets en drag-and-drop.
 - Gestion des assets (si permission module).
+- **Installateur web `install.php`** pour configuration complète (DB, schéma, super admin, config PHP).
 
 ## Arborescence
 
+- `install.php` : assistant d'installation complet.
 - `public/` : interface dashboard (nécessite login).
 - `admin/` : login, administration, gestion utilisateurs/droits.
 - `app/` : bootstrap, base de données, auth, repository dashboard.
-- `install/sql/schema.sql` : schéma + seed modules + seed super admin.
+- `install/sql/schema.sql` : schéma + seed modules.
 - `modules/` : futurs connecteurs.
 
 ## Installation rapide (IONOS)
 
-1. Créer une base MariaDB.
-2. Importer `install/sql/schema.sql`.
-3. Copier `config/config.php.example` vers `config/config.php` et renseigner la DB.
-4. Déployer via FTP/SFTP.
-5. Ouvrir `/admin/login.php`.
-
-## Compte initial
-
-- Utilisateur: `superadmin`
-- Mot de passe initial: `ChangeMe123!`
-- ⚠️ Changer le mot de passe immédiatement après installation.
+1. Déployer les fichiers via FTP/SFTP.
+2. Ouvrir `/install.php`.
+3. Saisir les paramètres MariaDB IONOS + compte super administrateur.
+4. Laisser l'assistant créer les tables et `config/config.php`.
+5. Se connecter via `/admin/login.php`.
+6. Supprimer `install.php` après installation pour la sécurité.
 
 ## Gestion des droits modules
 
