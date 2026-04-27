@@ -70,3 +70,23 @@ php scripts/bump_version.php 0.3.0 "Ajout connecteur Free Pro"
 git add VERSION CHANGELOG.md
 git commit -m "chore(release): bump version to 0.3.0"
 ```
+
+## Publication sur `main` (GitHub)
+
+Pour garantir que la version publiée est bien sur `main`:
+
+1. Vérifier que `VERSION` et `CHANGELOG.md` sont à jour.
+2. Lancer le script local:
+   - `./scripts/publish_main.sh`
+3. Le script prépare:
+   - merge fast-forward de `work` vers `main`,
+   - tag `vX.Y.Z` basé sur `VERSION`.
+4. Publier vers GitHub:
+   - `git push origin main`
+   - `git push origin vX.Y.Z`
+
+Un workflow GitHub Actions (`.github/workflows/publish-main.yml`) valide automatiquement sur chaque push vers `main`:
+
+- format SemVer de `VERSION`,
+- présence de la version dans `CHANGELOG.md`,
+- création d'un artefact `.tar.gz` prêt à distribuer.

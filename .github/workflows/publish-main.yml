@@ -1,0 +1,41 @@
+name: Publish from main
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  validate-release-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate VERSION format
+        run: |
+          VERSION=$(cat VERSION | tr -d '[:space:]')
+          echo "VERSION=${VERSION}"
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "VERSION must follow SemVer (x.y.z)"
+            exit 1
+          fi
+
+      - name: Ensure changelog contains current version
+        run: |
+          VERSION=$(cat VERSION | tr -d '[:space:]')
+          if ! grep -q "## \[$VERSION\]" CHANGELOG.md; then
+            echo "CHANGELOG.md must contain version $VERSION"
+            exit 1
+          fi
+
+      - name: Package release artifact
+        run: |
+          VERSION=$(cat VERSION | tr -d '[:space:]')
+          tar --exclude='.git' --exclude='.github' -czf "monitoringsi-${VERSION}.tar.gz" .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitoringsi-package
+          path: monitoringsi-*.tar.gz
