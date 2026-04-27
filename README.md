@@ -44,3 +44,27 @@ Depuis `/admin/users.php` (super_admin uniquement), vous pouvez:
 2. Ajouter un CRUD des modules installés depuis l'interface.
 3. Ajouter rôles fins (lecture seule, opérateur réseau, etc.).
 4. Connecter les modules de télémétrie réels (Free Pro, SNMP, agents OS).
+
+## Changelog et montée de version
+
+Le projet utilise:
+
+- `CHANGELOG.md` pour l'historique des changements,
+- `VERSION` pour la version courante,
+- `scripts/bump_version.php` pour préparer une release.
+
+### Process recommandé
+
+1. Mettre à jour votre code.
+2. Lancer la montée de version:
+   - `php scripts/bump_version.php 0.3.0 "Résumé court des nouveautés"`
+3. Compléter manuellement l'entrée générée dans `CHANGELOG.md` (sections Ajouté/Modifié/Correction/Sécurité).
+4. Commiter les fichiers modifiés (`VERSION`, `CHANGELOG.md`, code).
+
+Exemple:
+
+```bash
+php scripts/bump_version.php 0.3.0 "Ajout connecteur Free Pro"
+git add VERSION CHANGELOG.md
+git commit -m "chore(release): bump version to 0.3.0"
+```
