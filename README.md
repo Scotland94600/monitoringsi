@@ -2,6 +2,8 @@
 
 Application de monitoring installable en PHP/MariaDB avec authentification obligatoire, rôles utilisateurs, permissions par module, et administration dashboard drag-and-drop.
 
+**Version actuelle : 1.0.0**
+
 ## Ce qui est en place
 
 - Authentification obligatoire pour accéder à l'application.
