@@ -1,0 +1,21 @@
+<?php
+
+return [
+    'db' => [
+        'host' => 'localhost',
+        'port' => 3306,
+        'database' => 'monitoringsi',
+        'username' => 'monitor_user',
+        'password' => 'change-me',
+        'charset' => 'utf8mb4',
+    ],
+    'app' => [
+        'name' => 'MonitoringSI',
+        'base_url' => '',
+    ],
+    'uploads' => [
+        'absolute_path' => __DIR__ . '/../storage/uploads/assets',
+        'public_path' => '/storage/uploads/assets',
+        'max_size_bytes' => 5 * 1024 * 1024,
+    ],
+];
